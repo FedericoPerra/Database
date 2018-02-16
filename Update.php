@@ -9,42 +9,24 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<form method="post">
+<form method="post" action="Modify.php">
+    <input type="hidden" name="id" value="<?php echo $_POST['identification']?>">
     <div class="form-group">
         <label for="nm">Nome:</label>
-        <input type="text" class="form-control" id="nm">
+        <input type="text" class="form-control" name="name" id="nm">
     </div>
     <div class="form-group">
         <label for="cnm">Cognome:</label>
-        <input type="text" class="form-control" id="cnm">
+        <input type="text" class="form-control" name="surname" id="cnm">
     </div>
     <div class="form-group">
         <label for="mail">Email:</label>
-        <input type="text" class="form-control" id="mail">
+        <input type="email" class="form-control" name="Email" id="mail">
+    </div>
+    <div class="form-group">
+        <label for="up">UPDATE:</label>
+        <input type="submit" class="form-control" id="up">
     </div>
 </form>
 </body>
 </html>
-
-<?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "utenti";
-
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-$sql = "UPDATE credenziali SET lastname='Doe' WHERE id=2";
-
-if ($conn->query($sql) === TRUE) {
-    echo "Record updated successfully";
-} else {
-    echo "Error updating record: " . $conn->error;
-}
-
-$conn->close();

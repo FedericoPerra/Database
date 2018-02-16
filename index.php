@@ -12,7 +12,7 @@
 <form method="post">
 <h3 align="center">Tabella CRUD con libreria bootstrap</h3>
 <div class="container">
-    <h1 id="button"><button class="btn success">Add new record</button></h1>
+    <h1 id="button"><button type="submit" class="btn success" formaction="Modify.php">Add new record</button></h1>
     <table class="table table-hover">
         <thead>
         <tr>
@@ -34,9 +34,9 @@ $username = "root";
 $password = "";
 $dbname = "Utenti";
 
-// Create connection
+
 $conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
+
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -54,7 +54,7 @@ if ($result->num_rows > 0) {
         echo "<td>".$row['Cognome']."</td>";
         echo "<td>".$row['Email']."</td>";
         echo "<input type='hidden' name='identification' value='$riga'>";
-        echo "<td><button type=\"submit\" class=\"btn btn-primary\" name='btnUpdate' formaction='Update.php'>Update</button></td>";
+        echo "<td><button type=\"submit\" class=\"btn btn-primary\" name='btnUpdate' formaction='Modify.php'>Update</button></td>";
         echo "<td><button type=\"submit\" class=\"btn btn-danger\" name='btnDelete' formaction='Delete.php'>Delete</button></td>";
         echo "</tr>";
     }
