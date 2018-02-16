@@ -9,12 +9,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<form method="post">
+<form method="post" action="addRecordMenu.php">
 <h3 align="center">Tabella CRUD con libreria bootstrap</h3>
 <div class="container">
     <h1 id="button"><button type="submit" class="btn success" formaction="addRecordMenu.php">Add new record</button></h1>
     <table class="table table-hover">
-        <thead>
         <tr>
             <th>id</th>
             <th>Nome</th>
@@ -23,10 +22,8 @@
             <th>Update</th>
             <th>Delete</th>
         </tr>
-        </thead>
     </div>
 </form>
-</body>
 
 <?php
 $servername = "localhost";
@@ -51,21 +48,27 @@ if ($result->num_rows > 0) {
         $nome=$row['Nome'];
         $cognome=$row['Cognome'];
         $email=$row['Email'];
-        echo "<input type='hidden' name='identification' value='$riga'>";
-        echo "<input type='hidden' name='name' value='$nome'>";
-        echo "<input type='hidden' name='surname' value='$cognome'>";
-        echo "<input type='hidden' name='email' value='$email'>";
+        echo "<form action='Modify.php' method='post'>";
+        echo "<input type='hidden' name='identification' value=$riga>";
+        echo "<input type='hidden' name='name' value=$nome>";
+        echo "<input type='hidden' name='surname' value=$cognome>";
+        echo "<input type='hidden' name='email' value=$email>";
         echo "<tr>";
         echo "<td>".$row['id']."</td>";
         echo "<td>".$row['Nome']."</td>";
         echo "<td>".$row['Cognome']."</td>";
         echo "<td>".$row['Email']."</td>";
-        echo "<td><button type=\"submit\" class=\"btn btn-primary\" name='btnUpdate' formaction='Modify.php'>Update</button></td>";
-        echo "<td><button type=\"submit\" class=\"btn btn-danger\" name='btnDelete' formaction='Delete.php'>Delete</button></td>";
+        echo "<td><button type=\"submit\" class=\"btn btn-primary\" name='btnUpdate'>Update</button></td>";
+        echo"</form>";
+        echo "<form action='Delete.php' method='post'>";
+        echo "<input type='hidden' name='identification' value=$riga>";
+        echo "<td><button type=\"submit\" class=\"btn btn-danger\" name='btnDelete'>Delete</button></td>";
+        echo "</form>";
         echo "</tr>";
     }
 }
 echo "</table>";
+echo "</body>";
 
 $conn->close();
 
